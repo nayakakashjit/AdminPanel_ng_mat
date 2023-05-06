@@ -5,7 +5,7 @@ import { moduleRoutes } from './shared/moduleRout/moduleRout';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'account',
     pathMatch: 'full',
     
   },

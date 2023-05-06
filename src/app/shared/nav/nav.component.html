@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" 
+  <mat-sidenav #drawer class="sidenav"
+      *ngIf="isLoggedIn$ | async as isLoggedIn"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
@@ -14,13 +15,12 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" *ngIf="isLoggedIn$ | async as isLoggedIn">
       <button
         type="button"
         aria-label="Toggle sidenav"
         mat-icon-button
-        (click)="drawer.toggle()"
+        (click)="toggleSidenav()"
         >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
@@ -33,7 +33,7 @@
         <button mat-menu-item>My profile</button>
         <button mat-menu-item>Setting</button>
       </mat-menu>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" routerLink="/account">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="onLogout()">
         <mat-icon>logout</mat-icon>
       </button>
     </mat-toolbar>
