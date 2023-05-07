@@ -9,6 +9,10 @@ export const moduleRoutes: Routes = [
         path: 'home',
         loadChildren: () => import('../../modules/home/home.module').then(module => module.HomeModule)
     },
+    {
+        path:'loans',
+        loadChildren: () => import('../../modules/loans/loans.module').then(module => module.LoansModule)
+    },
     { 
         path: 'about', 
         loadChildren: () => import('../../modules/about/about.module').then(module => module.AboutModule) 

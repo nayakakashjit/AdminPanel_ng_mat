@@ -8,8 +8,8 @@ import { AuthService } from '@app/core/auth/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
-  private formSubmitAttempt: boolean;
+  form!: FormGroup;
+  private formSubmitAttempt!: boolean;
   
   constructor(
     private fb: FormBuilder,
@@ -25,14 +25,12 @@ export class LoginComponent implements OnInit {
 
   public isFieldInvalid(field: string) {
     return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
+      (!this.form.get(field)?.valid && this.form.get(field)?.touched) ||
+      (this.form.get(field)?.untouched && this.formSubmitAttempt)
     );
   }
 
   public onSubmit() {
-    console.log(this.form.value);
-    
     if (this.form.valid) {
       this.authService.login(this.form.value);
     }
