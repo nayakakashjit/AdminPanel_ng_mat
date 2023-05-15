@@ -9,6 +9,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   exports: [
@@ -20,7 +23,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatIconModule,
     MatListModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModules {}

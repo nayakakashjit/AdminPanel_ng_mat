@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@app/core/auth/auth.service';
+import { SnackBarService } from '@app/core/services/snack-bar.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +14,21 @@ export class LoginComponent implements OnInit {
   
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBService:SnackBarService
   ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
+    this.authService.loggedResponse.subscribe((res)=>{
+      console.log(res);
+      if (res.data) {
+        this.snackBService.openSnackBar(res.message, 'close');
+      }
+    })
   }
 
   public isFieldInvalid(field: string) {

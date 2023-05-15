@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 // import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './material-modules/material.modules';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { MaterialModules } from './material-modules/material.modules';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     SharedModule,
     BrowserAnimationsModule,

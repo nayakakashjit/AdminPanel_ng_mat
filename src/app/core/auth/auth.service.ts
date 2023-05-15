@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { HttpService } from '../services/http.service';
+import { catchError, tap } from 'rxjs/operators';
 
 export interface User {
-  userName: string;
+  email: string;
   password: string;
 }
 
@@ -12,19 +14,34 @@ export interface User {
 })
 export class AuthService {
   private loggedIn = new BehaviorSubject<boolean>(false);
+  public loggedResponse = new BehaviorSubject<any>({});
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
   }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private httpService: HttpService,
   ) { }
 
   public login(user: User){
-    if (user.userName !== '' && user.password !== '' ) {
-      this.loggedIn.next(true);
-      this.router.navigate(['/home']);
+    if (user.email !== '' && user.password !== '' ) {
+      this.httpService.post('login', user)
+      .pipe(
+        tap(response => {
+          console.log(response);
+          this.loggedIn.next(true);
+          this.loggedResponse.next(response)
+          this.router.navigate(['/home']);
+        }),
+        catchError((error) => {
+          console.log(error);
+          this.loggedResponse.next(error);
+          return of(null)
+        })
+      )
+      .subscribe()
     }
   }
 

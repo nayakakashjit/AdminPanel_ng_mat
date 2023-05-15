@@ -7,13 +7,22 @@ import { InstaLoanComponent } from './pages/insta-loan/insta-loan.component';
 import { CreditCardComponent } from './pages/credit-card/credit-card.component';
 import { PersonalLoanComponent } from './pages/personal-loan/personal-loan.component';
 import { BusinessLoanComponent } from './pages/business-loan/business-loan.component';
+import { MaterialModules } from '@app/material-modules/material.modules';
 
 
 @NgModule({
-  declarations: [HomeLoanComponent, InstaLoanComponent, CreditCardComponent, PersonalLoanComponent, BusinessLoanComponent],
+  declarations: [
+    HomeLoanComponent, 
+    InstaLoanComponent, 
+    CreditCardComponent, 
+    PersonalLoanComponent, 
+    BusinessLoanComponent
+  ]
+    ,
   imports: [
     CommonModule,
-    LoansRoutingModule
+    LoansRoutingModule,
+    MaterialModules
   ]
 })
 export class LoansModule { }
