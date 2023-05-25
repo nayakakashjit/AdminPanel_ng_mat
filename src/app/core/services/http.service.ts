@@ -4,7 +4,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 const base_url = 'http://127.0.0.1:3000';
-const options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+
+const httpOptions = { 
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +24,7 @@ export class HttpService {
     console.log(url, body);
     
     return this.http
-      .post(`${base_url}/${url}`, JSON.stringify(body), options)
+      .post(`${base_url}/${url}`, JSON.stringify(body), httpOptions)
       .pipe(catchError(this.formatErrors));
   }
 

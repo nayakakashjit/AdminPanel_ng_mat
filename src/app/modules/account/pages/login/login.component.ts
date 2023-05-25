@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '@app/core/auth/auth.service';
 import { SnackBarService } from '@app/core/services/snack-bar.service';
 
@@ -11,6 +11,8 @@ import { SnackBarService } from '@app/core/services/snack-bar.service';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   private formSubmitAttempt!: boolean;
+
+  // email = new FormControl('', [Validators.required, Validators.email]);
   
   constructor(
     private fb: FormBuilder,
@@ -26,10 +28,19 @@ export class LoginComponent implements OnInit {
     this.authService.loggedResponse.subscribe((res)=>{
       console.log(res);
       if (res.data) {
-        this.snackBService.openSnackBar(res.message, 'close');
+        const type = res.status === "success" ? 'success' : "error"
+        this.snackBService.openSnackBar(res.message, type);
       }
     })
   }
+
+  // getErrorMessage() {
+  //   if (this.email.hasError('required')) {
+  //     return 'You must enter a value';
+  //   }
+
+  //   return this.email.hasError('email') ? 'Not a valid email' : '';
+  // }
 
   public isFieldInvalid(field: string) {
     return (

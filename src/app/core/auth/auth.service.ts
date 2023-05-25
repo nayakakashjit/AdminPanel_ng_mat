@@ -30,7 +30,11 @@ export class AuthService {
       this.httpService.post('login', user)
       .pipe(
         tap(response => {
-          console.log(response);
+          console.log(response.headers);
+          
+          // response.headers.keys().forEach((keyName: any) => {
+          //   console.log( `The value of the ${keyName} header is: ${response.headers.get(keyName)}`);
+          // });
           this.loggedIn.next(true);
           this.loggedResponse.next(response)
           this.router.navigate(['/home']);

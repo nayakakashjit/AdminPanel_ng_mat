@@ -170,6 +170,35 @@ a:hover{
 	background-position: right;
 }
 
+::ng-deep .info {
+    background-color: #2962ff;
+	color: #fff;
+}
+::ng-deep .success {
+    background-color: #00c853;
+	color: #fff;
+}
+::ng-deep .error {
+    background-color: #d32f2f;
+	color: #fff;
+}
+.example-full-width {
+	width: 100%;
+  }
+
+::ng-deep .mat-form-field-label {
+	color:green !important;
+  }
+  ::ng-deep .mat-focused .mat-form-field-label {
+	/*change color of label*/
+	color: green !important;
+   }
+  
+   ::ng-deep.mat-form-field-underline {
+	/*change color of underline*/
+	background-color: green !important;
+  } 
+  
 
 @media screen and (max-width: 1050px){
 	.container{

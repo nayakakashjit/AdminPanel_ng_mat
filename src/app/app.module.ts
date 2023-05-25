@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './material-modules/material.modules';
 import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './core/interceptors/http.interceptor';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModules,
   ],
   // providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
