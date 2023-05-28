@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from '@app/core/auth/auth.service';
+import { StorageService } from '@app/core/services/storage.service';
 
 @Component({
   selector: 'app-nav',
@@ -17,15 +18,18 @@ export class NavComponent implements OnInit {
       shareReplay()
     );
 
-  isLoggedIn$!: Observable<boolean>;
+  public isLoggedIn$!: Observable<boolean>;
+  public user: any;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService
+    private authService: AuthService,
+    private storageService: StorageService
   ) { }
 
   public ngOnInit() {
     this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.get_user();
   }
 
   public onLogout() {
@@ -36,4 +40,9 @@ export class NavComponent implements OnInit {
     this.drawer.toggle();
   }
 
+  public get_user() {
+    if (this.storageService.getUser().data) {
+      this.user = this.storageService.getUser().data[0];
+    }
+  }
 }

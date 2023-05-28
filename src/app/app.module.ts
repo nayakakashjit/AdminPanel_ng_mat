@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModules } from './material-modules/material.modules';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptors/http.interceptor';
+import { errorInterceptorProviders } from './core/interceptors/error.interceptor';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { httpInterceptorProviders } from './core/interceptors/http.interceptor';
     MaterialModules,
   ],
   // providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, errorInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

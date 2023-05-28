@@ -26,8 +26,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
     this.authService.loggedResponse.subscribe((res)=>{
-      console.log(res);
-      if (res.data) {
+      if (res.status) {
         const type = res.status === "success" ? 'success' : "error"
         this.snackBService.openSnackBar(res.message, type);
       }

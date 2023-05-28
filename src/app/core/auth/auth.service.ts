@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, of } from 'rxjs';
 import { HttpService } from '../services/http.service';
 import { catchError, tap } from 'rxjs/operators';
+import { StorageService } from '../services/storage.service';
 
 export interface User {
   email: string;
@@ -13,7 +14,7 @@ export interface User {
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false);
+  private loggedIn = new BehaviorSubject<boolean>(this.storageService.isLoggedIn());
   public loggedResponse = new BehaviorSubject<any>({});
 
   get isLoggedIn() {
@@ -23,34 +24,40 @@ export class AuthService {
   constructor(
     private router: Router,
     private httpService: HttpService,
+    private storageService: StorageService
   ) { }
 
-  public login(user: User){
-    if (user.email !== '' && user.password !== '' ) {
+  public login(user: User) {
+    if (user.email !== '' && user.password !== '') {
       this.httpService.post('login', user)
-      .pipe(
-        tap(response => {
-          console.log(response.headers);
-          
-          // response.headers.keys().forEach((keyName: any) => {
-          //   console.log( `The value of the ${keyName} header is: ${response.headers.get(keyName)}`);
-          // });
-          this.loggedIn.next(true);
-          this.loggedResponse.next(response)
-          this.router.navigate(['/home']);
-        }),
-        catchError((error) => {
-          console.log(error);
-          this.loggedResponse.next(error);
-          return of(null)
-        })
-      )
-      .subscribe()
+        .pipe(
+          tap(response => {
+            this.storageService.saveUser(response);
+            this.loggedResponse.next(response);
+            this.router.navigate(['/home']);
+            const checkLogin = this.storageService.isLoggedIn();
+            this.loggedIn.next(checkLogin);
+          }),
+          catchError((error) => {
+            this.loggedResponse.next(error);
+            return of(null)
+          })
+        )
+        .subscribe()
     }
   }
 
   public logout() {
-    this.loggedIn.next(false);
-    this.router.navigate(['/']);
+    this.httpService.get('logout').subscribe(
+      (response) => {
+        this.loggedIn.next(false);
+        this.storageService.clean();
+        this.router.navigate(['/']);
+        this.loggedResponse.next(response);
+      },
+      (error) => {
+        this.loggedResponse.next(error);
+      }
+    )
   }
 }
