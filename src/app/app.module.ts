@@ -12,13 +12,15 @@ import { MaterialModules } from './material-modules/material.modules';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptors/http.interceptor';
 import { errorInterceptorProviders } from './core/interceptors/error.interceptor';
+import { LoaderComponent } from './shared/loader/loader.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    NavComponent
+    NavComponent,
+    LoaderComponent
 
   ],
   imports: [

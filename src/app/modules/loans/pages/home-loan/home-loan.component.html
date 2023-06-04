@@ -1,3 +1,8 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
 
@@ -62,7 +67,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="delete(element)">
               <!-- <mat-icon>delete</mat-icon> -->
               <span>Delete</span>
             </button>

@@ -13,9 +13,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.httpService.get('homeloan').subscribe(
+    this.httpService.get('homeloan/users').subscribe(
       (res) => console.log(res)
-      
     )
   }
 

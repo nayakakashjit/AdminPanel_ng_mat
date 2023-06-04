@@ -79,7 +79,7 @@ form{
 .input-div > div > h5{
 	position: absolute;
     left: -22px;
-    top: -70%;
+    top: 0%;
 	transform: translateY(-50%);
 	color: #999;
 	font-size: 18px;
@@ -170,6 +170,7 @@ a:hover{
 	background-position: right;
 }
 
+/* snackbar */
 ::ng-deep .info {
     background-color: #2962ff;
 	color: #fff;
@@ -182,6 +183,7 @@ a:hover{
     background-color: #d32f2f;
 	color: #fff;
 }
+/* snackbar */
 .example-full-width {
 	width: 100%;
   }

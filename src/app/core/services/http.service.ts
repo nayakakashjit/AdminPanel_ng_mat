@@ -21,11 +21,19 @@ export class HttpService {
   }
 
   public post(url: string, body: object = {}): Observable<any> {
-    console.log(url, body);
-    
     return this.http
       .post(`${base_url}/${url}`, JSON.stringify(body), httpOptions)
       .pipe(catchError(this.formatErrors));
+  }
+
+  public put(url: string, body: object = {}): Observable<any> {
+    return this.http
+      .put(`${base_url}`+url, JSON.stringify(body), httpOptions)
+      .pipe(catchError(this.formatErrors));
+  }
+
+  public delete(url: string): Observable<any> {
+    return this.http.delete(`${base_url}/${url}`).pipe(catchError(this.formatErrors));
   }
 
   public formatErrors(error: any): Observable<any> {

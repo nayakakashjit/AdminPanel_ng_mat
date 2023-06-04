@@ -30,6 +30,7 @@ export class AuthGuard implements CanActivate {
 /* 
 First we are going to retrieve the isLoggedIn ({1}) getter from the AuthService, which is an Observable. 
 Since we are only interested in checking the value from the Observalbe a single time (if the user is logged in or not), we will use the take operator ({2}). 
-We will verify the value emitted by the BehaviorSubject ({3}) and if not logged in we will navigate to the login screen ({4}) and return false. 
+We will verify the value emitted by the BehaviorSubject ({3}) and 
+if not logged in we will navigate to the login screen ({4}) and return false. 
 The AuthGuard will return true in case the user is logged in, meaning the user can access the route (path: ‘’) which renders the HomeComponent.
 */

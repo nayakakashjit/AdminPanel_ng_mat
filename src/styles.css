@@ -11,3 +11,68 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: 10px 0 0 0;
     margin-bottom: 58px;
 }
+
+/* Snackbar bg */
+::ng-deep .info {
+    background-color: #2962ff !important;
+	color: #fff;
+}
+::ng-deep .success {
+    background-color: #00c853 !important;
+	color: #fff;
+}
+::ng-deep .error {
+    background-color: #d32f2f !important;
+	color: #fff;
+}
+
+/* Mat table css overide */
+
+.mat-table {
+    background: #fff;
+}
+
+.mat-header-cell {
+    color: #424242;
+}
+
+.mat-cell, .mat-footer-cell {
+    color: #424242;
+}
+
+mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    border-bottom-color: #0000001f;
+}
+
+.mat-paginator {
+    background: #ffffff;
+}
+
+.mat-paginator, .mat-paginator-page-size .mat-select-trigger {
+    color: #424242;
+}
+
+.mat-icon-button.mat-button-disabled.mat-button-disabled {
+    color: #6c757d52;
+}
+
+.mat-select-value {
+    color: #424242;
+}
+
+.mat-select-arrow {
+    color: #0000008a;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: #212529;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-form-field-appearance-legacy .mat-form-field-label {
+    color: #0009;
+}

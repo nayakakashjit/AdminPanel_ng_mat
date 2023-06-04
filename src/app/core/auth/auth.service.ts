@@ -32,13 +32,16 @@ export class AuthService {
       this.httpService.post('login', user)
         .pipe(
           tap(response => {
-            this.storageService.saveUser(response);
             this.loggedResponse.next(response);
-            this.router.navigate(['/home']);
-            const checkLogin = this.storageService.isLoggedIn();
-            this.loggedIn.next(checkLogin);
+            if (response.status === 'success') {
+              this.storageService.saveUser(response);
+              this.router.navigate(['/home']);
+              const checkLogin = this.storageService.isLoggedIn();
+              this.loggedIn.next(checkLogin);
+            }
           }),
           catchError((error) => {
+            console.log('error', error);
             this.loggedResponse.next(error);
             return of(null)
           })

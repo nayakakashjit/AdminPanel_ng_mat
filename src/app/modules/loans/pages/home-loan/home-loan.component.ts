@@ -2,7 +2,8 @@ import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { HttpService } from '@app/core/services/http.service';
-import { IHomeLoan } from '../../../../core/models/homeLoan'
+import { IHomeLoan } from '../../../../core/models/homeLoan';
+import { SnackBarService } from '@app/core/services/snack-bar.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class HomeLoanComponent implements OnInit, AfterViewInit  {
   
   constructor(
     private httpService: HttpService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private snackBService:SnackBarService
   ) { }
 
   ngAfterViewInit() {
@@ -28,13 +30,39 @@ export class HomeLoanComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit() {
-    this.httpService.get('homeloan').subscribe(
+    this.getLoans();
+  }
+
+  public getLoans() {
+    this.httpService.get('homeloan/users').subscribe(
       (res) => {
         this.ELEMENT_DATA = res.data;
         this.dataSource = new MatTableDataSource<IHomeLoan>(this.ELEMENT_DATA);
         this.dataSource.paginator = this.paginator;
+      },
+      (error) =>{
+        console.log(error);
+        this.snackBService.openSnackBar(error.message, error.status);
       }
     )
+  }
+
+  public delete(event: any) {
+    this.httpService.delete(`homeloan/users/${event._id}`).subscribe(
+      (res) => {
+        this.snackBService.openSnackBar(res.message, res.status);
+        this.getLoans();
+      },
+      (err) => {
+        console.log(err);
+        this.snackBService.openSnackBar(err.message, err.status);
+      }
+    )
+  }
+
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '@app/core/auth/auth.service';
 import { SnackBarService } from '@app/core/services/snack-bar.service';
+import { StorageService } from '@app/core/services/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +19,15 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBService:SnackBarService
+    private snackBService:SnackBarService,
+    private storageService: StorageService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
+    if (this.storageService.isLoggedIn()) {
+      this.router.navigate(['/home']); 
+    }
     this.form = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
