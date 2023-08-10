@@ -3,10 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-const base_url = 'http://127.0.0.1:3000';
+const base_url = 'https://us-central1-akashjitmailer-ac937.cloudfunctions.net/app';
+// const base_url = 'http://127.0.0.1:3000';
 
 const httpOptions = { 
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  // headers: new HttpHeaders({ 'Content-Type': 'application/json' });
+  headers: new HttpHeaders().set('Content-Type', 'application/json')
+  // headers: { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 };
 
 @Injectable({

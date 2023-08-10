@@ -76,3 +76,11 @@ mat-row, mat-header-row, mat-footer-row, th.mat-header-cell, td.mat-cell, td.mat
   .mat-form-field-appearance-legacy .mat-form-field-label {
     color: #0009;
 }
+
+.mat-card {
+    background: #ffffff;
+    color: #424242;
+    box-shadow: none !important;
+    text-align: center;
+    padding-top: 5% !important;
+}

@@ -7,14 +7,21 @@ import { HttpService } from '@app/core/services/http.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public recordlength: any;
 
   constructor(
     private httpService: HttpService,
   ) { }
 
   ngOnInit() {
-    this.httpService.get('homeloan/users').subscribe(
-      (res) => console.log(res)
+    this.httpService.get('dashboard').subscribe(
+      (res) => {
+        console.log(res);
+        this.recordlength = res.values
+      },
+      (error) => {
+        console.error(error);
+      }
     )
   }
 

@@ -74,11 +74,14 @@
           </mat-menu>
         </td>
       </ng-container>
-  
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-  
+
+    <mat-card *ngIf="ELEMENT_DATA && ELEMENT_DATA.length == 0">
+      <mat-card-content>There are no records available.</mat-card-content>
+    </mat-card>
+
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                    showFirstLastButtons
                    aria-label="Select page of IHomeLoan elements">
